@@ -1,0 +1,45 @@
+
+1.- datos personales:
+nombres, apellido paterno, apellido materno, documento identidad, expedido documento,CODIGO ESCALAFON, nacionalidad direccion,telefono, celular, genero, 
+fechanacimiento,grado en la policia,categoria licencia conducir, idiomas que habla, cuenta bancaria, el banco que pertenece la cuenta ,
+croquis domiciolio,coordenadas x e y gps , departamento, provincia, municipio, zona, barrio,correo, grupo factor sangre,
+contacto hemergencia ,telefono emergencia, parentesco del contacto hemergencia
+
+2.- estudios realizados. En esta parte tomaremos encuenta los datos de estudio bachillerato y universitario
+unidad educativa bachillerato, fecha graduacion secundaria, municipio egreso secundaria, titulo optenido
+, numero semestres aprobados, institucion de formacion, titulo profesional optenido, fecha graduacion, 
+departamento de egreso   
+
+3.- DATOS INSTITUCIONALES LA FECHA QUE LLEGA ALA INSTITUCION POLICIAL ESTA SE CLASIFICA POR DIRECCIONES, FECHA DE DESTINO A LA DIRECCION, DIRECCION POLICIAL PROCEDENTE, tambien tomar encuenta a que Unidad o direccion se va 
+cuando se cambie de unidad de ello necesitamos fecha alta para la nueva unidad, numero de momorial de alta, fecha cambio de destino, memorandum cambio destino, años de servicio
+  
+4.- urgente inventario de aeronaves 25 de octubre. 
+recepcion
+entrega 
+caracteristicas 
+que elementos tiene 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
