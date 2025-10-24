@@ -20,11 +20,13 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            FabricantesSeeder::class,
             NacionalidadesSeeder::class,
             GradosSeeder::class,
             BancosSeeder::class,
             IdiomasSeeder::class,
             UbicacionesSeeder::class,
+            HangaresSeeder::class,
             UserModel::class,
             DepartamentoSeeder::class,
             ProvinciaSeeder::class,

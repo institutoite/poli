@@ -10,16 +10,22 @@ return new class extends Migration
     {
         Schema::create('aeronaves', function (Blueprint $table) {
             $table->id();
-            $table->string('matricula')->unique();
-            $table->string('tipo')->nullable(); // Avioneta / Helicoptero
-            $table->string('modelo')->nullable();
-            $table->string('marca')->nullable();
-            $table->string('numero_serie')->nullable()->index();
-            $table->string('numero_parte')->nullable()->index();
-            $table->string('fabricante')->nullable();
+            $table->string('matricula',15)->unique();
+            // Avioneta / Helicoptero
+            $table->enum('tipo', ['avioneta', 'helicoptero'])->nullable();
+            $table->string('modelo',50)->nullable();
+            // Algunas marcas comunes de aeronaves y opción 'otro'
+            $table->enum('marca', [
+                'cessna','piper','beechcraft','airbus','boeing','embraer','bombardier',
+                'bell','robinson','sikorsky','diamond','cirrus','tecnam','otro'
+            ])->nullable();
+            $table->string('numero_serie',50)->nullable()->index();
+            $table->string('numero_parte',50)->nullable()->index();
+            // Llave foránea a fabricantes
+            $table->foreignId('fabricante_id')->nullable()->constrained('fabricantes')->nullOnDelete();
             $table->enum('estado', ['activo', 'inactivo', 'mantenimiento'])->default('activo');
-            $table->string('ubicacion_actual')->nullable();
-            $table->string('documento_legal')->nullable(); // Ruta del doc legal de respaldo
+            $table->string('ubicacion_actual',50)->nullable();
+            $table->string('documento_legal',50)->nullable(); // Ruta del doc legal de respaldo
             $table->timestamps();
             $table->index('estado');
         });

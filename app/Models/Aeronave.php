@@ -10,8 +10,8 @@ class Aeronave extends Model
     use HasFactory;
 
     protected $fillable = [
-        'matricula', 'tipo', 'modelo', 'marca', 'numero_serie', 'numero_parte', 'fabricante',
-        'estado', 'ubicacion_actual', 'documento_legal',
+        'matricula', 'tipo', 'modelo', 'marca', 'numero_serie', 'numero_parte', 'fabricante_id',
+        'estado', 'hangar_id', 'ubicacion_actual', 'documento_legal',
     ];
 
     public function motores()
@@ -22,5 +22,15 @@ class Aeronave extends Model
     public function recepciones()
     {
         return $this->hasMany(Recepcion::class);
+    }
+
+    public function fabricante()
+    {
+        return $this->belongsTo(Fabricante::class);
+    }
+
+    public function hangar()
+    {
+        return $this->belongsTo(Hangar::class);
     }
 }
