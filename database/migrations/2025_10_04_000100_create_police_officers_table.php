@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignId('nacionalidad_id')->nullable()->constrained('nacionalidades')->nullOnDelete();
             $table->foreignId('grado_id')->constrained('grados');
             $table->foreignId('banco_id')->constrained('bancos');
+            $table->string('cuenta_bancaria', 25)->nullable();
 
             // Licencia de conducir enum
             $table->enum('categoria_licencia_conducir', ['A','B','C','M','P','T','Ninguna'])->nullable();
@@ -42,7 +43,6 @@ return new class extends Migration
             $table->foreignId('barrio_id')->constrained('barrios');
 
             // Otros datos
-            $table->string('cuenta_bancaria', 25)->nullable();
             $table->string('croquis_domicilio',25)->nullable();
             $table->decimal('coordenada_x', 10, 7)->nullable(); // longitud
             $table->decimal('coordenada_y', 10, 7)->nullable(); // latitud

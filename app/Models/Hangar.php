@@ -9,6 +9,9 @@ class Hangar extends Model
 {
     use HasFactory;
 
+    // La tabla se llama 'hangares' (no 'hangars')
+    protected $table = 'hangares';
+
     protected $fillable = [
         'nombre', 'codigo', 'ubicacion',
     ];

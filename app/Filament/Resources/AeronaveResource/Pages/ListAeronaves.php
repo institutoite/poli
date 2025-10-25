@@ -13,7 +13,11 @@ class ListAeronaves extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Crear aeronave')
+                ->modalHeading('Nueva aeronave')
+                ->modalSubmitActionLabel('Guardar')
+                ->modalCancelActionLabel('Cancelar'),
         ];
     }
 }

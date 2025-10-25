@@ -25,6 +25,7 @@ class PoliceOfficerResource extends Resource
     protected static ?string $model = PoliceOfficer::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Personal policial';
 
     public static function form(Form $form): Form
     {
@@ -64,7 +65,7 @@ class PoliceOfficerResource extends Resource
                             ])
                             ->default(null),
                         Forms\Components\TextInput::make('codigo_escalafon')
-                            ->label('Código Escalafón')
+                            ->label('Número Escalafón')
                             ->maxLength(25)
                             ->default(null),
                     ]),

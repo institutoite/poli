@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             IdiomasSeeder::class,
             UbicacionesSeeder::class,
             HangaresSeeder::class,
+            AeronavesSeeder::class,
             UserModel::class,
             DepartamentoSeeder::class,
             ProvinciaSeeder::class,
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
             ZonaSeeder::class,
             BarrioSeeder::class,
             PartesCatalogoSeeder::class,
+            AeronavesSeeder::class,
         ]);
     }
 }

@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('matricula',15)->unique();
             // Avioneta / Helicoptero
-            $table->enum('tipo', ['avioneta', 'helicoptero'])->nullable();
+            $table->enum('tipo', ['ala fija', 'ala rotatoria'])->nullable();
             $table->string('modelo',50)->nullable();
             // Algunas marcas comunes de aeronaves y opción 'otro'
             $table->enum('marca', [
@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('numero_parte',50)->nullable()->index();
             // Llave foránea a fabricantes
             $table->foreignId('fabricante_id')->nullable()->constrained('fabricantes')->nullOnDelete();
-            $table->enum('estado', ['activo', 'inactivo', 'mantenimiento'])->default('activo');
+            $table->enum('estado', ['activo', 'inactivo', 'mantenimiento'])->default('activo'); //agregar
             $table->string('ubicacion_actual',50)->nullable();
-            $table->string('documento_legal',50)->nullable(); // Ruta del doc legal de respaldo
+            $table->string('documento_legal',50)->nullable(); // Ruta del doc legal de respaldo. Agregar file 
             $table->timestamps();
             $table->index('estado');
         });

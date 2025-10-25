@@ -8,10 +8,10 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600,700&display=swap" rel="stylesheet" />
     <style>
         :root{
-            /* Verde olivo institucional */
-            --olivo:#4b6f44; /* alternativos: #556B2F, #3D5B2A */
-            --olivo-osc:#3c5837;
-            --olivo-claro:#dfe7db;
+            /* Verde olivo institucional: #808000 */
+            --olivo:#808000; /* RGB(128,128,0) */
+            --olivo-osc:#666600; /* tono más oscuro */
+            --olivo-claro:#ececcb; /* tono más claro */
             --gris:#f5f6f7;
             --texto:#1f2937;
         }

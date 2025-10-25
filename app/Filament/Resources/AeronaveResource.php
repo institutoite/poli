@@ -18,6 +18,20 @@ class AeronaveResource extends Resource
     protected static ?string $model = Aeronave::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Aeronaves';
+    protected static ?string $navigationGroup = 'Inventario aéreo';
+    protected static ?int $navigationSort = 2;
+    protected static bool $shouldRegisterNavigation = true;
+
+    public static function getModelLabel(): string
+    {
+        return 'Aeronave';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Aeronaves';
+    }
 
     public static function form(Form $form): Form
     {
@@ -29,8 +43,8 @@ class AeronaveResource extends Resource
                 Forms\Components\Select::make('tipo')
                     ->label('Tipo')
                     ->options([
-                        'avioneta' => 'Avioneta',
-                        'helicoptero' => 'Helicóptero',
+                        'ala fija' => 'Avión (Ala fija)',
+                        'ala rotatoria' => 'Helicóptero (Ala rotatoria)',
                     ])
                     ->required(),
                 Forms\Components\TextInput::make('modelo')
@@ -79,9 +93,14 @@ class AeronaveResource extends Resource
                     ->relationship('hangar', 'nombre')
                     ->searchable()
                     ->preload(),
-                Forms\Components\TextInput::make('documento_legal')
-                    ->maxLength(50)
-                    ->default(null),
+                Forms\Components\Textarea::make('documento_legal')
+                    ->label('Documento legal')
+                    ->rows(2)
+                    ->columnSpanFull(),
+                Forms\Components\Textarea::make('documento')
+                    ->label('Documento')
+                    ->rows(2)
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -116,6 +135,9 @@ class AeronaveResource extends Resource
                     ]),
                 Tables\Columns\TextColumn::make('documento_legal')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('documento')
+                    ->label('Documento')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -126,14 +148,41 @@ class AeronaveResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('tipo')
+                    ->form([
+                        Forms\Components\Radio::make('tipo')
+                            ->label('Filtrar por tipo')
+                            ->options([
+                                'ala fija' => 'Ala fija',
+                                'ala rotatoria' => 'Ala rotatoria',
+                            ])
+                            ->inline()
+                            ->columnSpanFull(),
+                    ])
+                    ->query(function (Builder $query, array $data) {
+                        if (! empty($data['tipo'])) {
+                            $query->where('tipo', $data['tipo']);
+                        }
+                        return $query;
+                    })
+                    ->indicateUsing(function (array $data) {
+                        if (! empty($data['tipo'])) {
+                            return 'Tipo: ' . ($data['tipo'] === 'ala fija' ? 'Ala fija' : 'Ala rotatoria');
+                        }
+                        return null;
+                    }),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label('Editar'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->label('Eliminar seleccionados')
+                        ->modalHeading('Eliminar registros seleccionados')
+                        ->modalSubmitActionLabel('Eliminar')
+                        ->modalCancelActionLabel('Cancelar'),
                 ]),
             ]);
     }
