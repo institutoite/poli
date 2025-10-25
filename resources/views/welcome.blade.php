@@ -61,13 +61,11 @@
                 </div>
             </div>
             <div>
-                @if (Route::has('login'))
-                    @auth
-                        <a href="{{ url(config('filament.path', 'admin')) }}" class="btn btn-outline">Ir al sistema</a>
-                    @else
-                        <a href="{{ route('login') }}" class="btn btn-primary">Ingresar</a>
-                    @endauth
-                @endif
+                @auth
+                    <a href="/admin" class="btn btn-outline">Ir al sistema</a>
+                @else
+                    <a href="/admin" class="btn btn-primary">Login</a>
+                @endauth
             </div>
         </div>
     </header>
@@ -78,13 +76,11 @@
                 <h1>Recepción, control e inventario de aeronaves</h1>
                 <p>Registre y consulte datos de aeronaves, motores y repuestos. Controle recepciones con checklist de partes internas y externas, personal interviniente y documentación legal.</p>
                 <div class="actions">
-                    @if (Route::has('login'))
-                        @auth
-                            <a href="{{ url(config('filament.path', 'admin')) }}" class="btn btn-primary">Ir al sistema</a>
-                        @else
-                            <a href="{{ route('login') }}" class="btn btn-primary">Iniciar sesión</a>
-                        @endauth
-                    @endif
+                    @auth
+                        <a href="/admin" class="btn btn-primary">Ir al sistema</a>
+                    @else
+                        <a href="/admin" class="btn btn-primary">Login</a>
+                    @endauth
                     <a href="#secciones" class="btn btn-outline">Ver más</a>
                 </div>
             </div>
