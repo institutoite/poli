@@ -97,10 +97,11 @@ class AeronaveResource extends Resource
                     ->label('Documento legal')
                     ->rows(2)
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('documento')
-                    ->label('Documento')
-                    ->rows(2)
-                    ->columnSpanFull(),
+            Forms\Components\FileUpload::make('documento')
+                ->label('Documento')
+                ->directory('documentos') // Carpeta donde se guardarán los archivos
+                ->required()
+                ->columnSpanFull(),
             ]);
     }
 
@@ -133,11 +134,17 @@ class AeronaveResource extends Resource
                         'warning' => 'mantenimiento',
                         'secondary' => 'inactivo',
                     ]),
-                Tables\Columns\TextColumn::make('documento_legal')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('documento')
+                
+                /*Tables\Columns\TextColumn::make('documento_legal')
+                    ->searchable(),*/
+                Tables\Columns\IconColumn::make('documento')
                     ->label('Documento')
-                    ->searchable(),
+                    ->icon('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5v-12m0 12l-3-3m3 3l3-3m6 6H6" />
+                    </svg>') // SVG del ícono de descarga
+                    ->url(fn (Aeronave $record) => $record->documento ? asset('storage/' . $record->documento) : null)
+                    ->openUrlInNewTab()
+                    ->tooltip('Descargar documento'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -146,6 +153,13 @@ class AeronaveResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('ultima_accion')
+                    ->label('Última Acción')
+                    ->sortable()
+                    ->getStateUsing(fn (Aeronave $record) => $record->ultima_accion),
+            ])
+            ->contentGrid([
+                    'class' => 'custom-background', // Clase personalizada para el fondo
             ])
             ->filters([
                 Tables\Filters\Filter::make('tipo')

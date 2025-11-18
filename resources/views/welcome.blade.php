@@ -1,141 +1,176 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Policía Aérea - Sistema</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600,700&display=swap" rel="stylesheet" />
-    <style>
-        :root{
-            /* Verde olivo institucional: #808000 */
-            --olivo:#808000; /* RGB(128,128,0) */
-            --olivo-osc:#666600; /* tono más oscuro */
-            --olivo-claro:#ececcb; /* tono más claro */
-            --gris:#f5f6f7;
-            --texto:#1f2937;
-        }
-        *{box-sizing:border-box}
-        html,body{margin:0;padding:0;font-family:Figtree,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:var(--texto);background:var(--gris)}
-        a{color:inherit;text-decoration:none}
-        .container{max-width:1152px;margin:0 auto;padding:0 1rem}
-        header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e9ecef}
-        .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-        .brand{display:flex;align-items:center;gap:.75rem}
-        .brand img{width:48px;height:48px;object-fit:contain}
-        .brand .title{font-weight:700;font-size:1.05rem;line-height:1.2}
-        .brand .subtitle{font-size:.8rem;color:#667085}
-        .btn{display:inline-flex;align-items:center;justify-content:center;padding:.7rem 1rem;border-radius:.5rem;font-weight:600;border:1px solid transparent;transition:.2s ease}
-        .btn-primary{background:var(--olivo);color:#fff}
-        .btn-primary:hover{background:var(--olivo-osc)}
-        .btn-outline{border-color:var(--olivo);color:var(--olivo);background:#fff}
-        .btn-outline:hover{background:var(--olivo-claro)}
-        .hero{background:linear-gradient(135deg,var(--olivo) 0%, var(--olivo-osc) 100%);color:#fff;padding:64px 0}
-        .hero-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center}
-        .hero h1{font-size:2.2rem;line-height:1.2;margin:0 0 .75rem 0}
-        .hero p{opacity:.95;margin:0 0 1.25rem 0}
-        .hero .actions{display:flex;gap:.75rem;flex-wrap:wrap}
-        .hero .image-placeholder{width:100%;aspect-ratio:16/10;border-radius:.75rem;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;border:1px dashed rgba(255,255,255,.35);}
-        .hero .image-placeholder span{opacity:.9}
-        .section{padding:56px 0}
-        .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-        .card{background:#fff;border:1px solid #e9ecef;border-radius:.75rem;padding:1.25rem;min-height:160px;display:flex;flex-direction:column;justify-content:space-between}
-        .card h3{margin:0 0 .35rem 0;font-size:1.05rem}
-        .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-        .thumb{background:#fff;border:1px dashed #cbd5e1;border-radius:.75rem;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:#64748b}
-        footer{border-top:1px solid #e9ecef;background:#fff;padding:24px 0;color:#657187}
-        .muted{color:#657187}
-        @media (max-width: 960px){.hero-wrap{grid-template-columns:1fr}.cards,.gallery{grid-template-columns:1fr 1fr}}
-        @media (max-width: 640px){.cards,.gallery{grid-template-columns:1fr}}
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policía Aérea Boliviana - Sistema de Gestión de Aeronaves</title>
+
+    <!-- Fuente moderna y limpia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
 </head>
 <body>
-    <header>
-        <div class="container nav">
+    <!-- Encabezado / Navegación -->
+    <header class="main-header">
+        <div class="container header-inner">
             <div class="brand">
-                <!-- Logo institucional: reemplace la ruta del src cuando tenga el archivo -->
-                <img src="{{ asset('images/logo-policia.png') }}" alt="Logo Policía" onerror="this.style.opacity=0.25" />
-                <div>
-                    <div class="title">Policía Aérea Boliviana</div>
-                    <div class="subtitle">Sistema de Gestión de Aeronaves</div>
+                <img class="brand-logo" src="{{ asset('storage/images/escudoPolicia.jpg') }}" alt="Escudo Policía Boliviana">
+                <div class="brand-text">
+                    <p class="brand-subtitle">Estado Plurinacional de Bolivia</p>
+                    <h1 class="brand-title">Policía Aérea Boliviana</h1>
+                    <h2 class="brand-system">Sistema de Gestión de Aeronaves</h2>
                 </div>
             </div>
-            <div>
-                @auth
-                    <a href="/admin" class="btn btn-outline">Ir al sistema</a>
-                @else
-                    <a href="/admin" class="btn btn-primary">Login</a>
-                @endauth
-            </div>
+
+            <nav class="main-nav">
+                <a href="#about">Nosotros</a>
+                <a href="#services">Servicios</a>
+                <a href="#contact">Contacto</a>
+                <a href="/admin/login" class="btn btn-outline">Acceso Administrativo</a>
+            </nav>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container hero-wrap">
-            <div>
-                <h1>Recepción, control e inventario de aeronaves</h1>
-                <p>Registre y consulte datos de aeronaves, motores y repuestos. Controle recepciones con checklist de partes internas y externas, personal interviniente y documentación legal.</p>
-                <div class="actions">
-                    @auth
-                        <a href="/admin" class="btn btn-primary">Ir al sistema</a>
-                    @else
-                        <a href="/admin" class="btn btn-primary">Login</a>
-                    @endauth
-                    <a href="#secciones" class="btn btn-outline">Ver más</a>
-                </div>
-            </div>
-            <div>
-                <div class="image-placeholder">
-                    <span>Área para imagen de portada (aeronave / hangar)</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="secciones" class="section">
-        <div class="container">
-            <div class="cards">
-                <div class="card">
-                    <div>
-                        <h3 style="color:var(--olivo)">Aeronaves</h3>
-                        <p class="muted">Inventario de avionetas y helicópteros. Matrícula, modelo, fabricante, estado y ubicación (hangar).</p>
+    <main>
+        <!-- Sección Hero -->
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <span class="hero-badge">Vigilancia y control del espacio aéreo</span>
+                    <h3>Protegiendo los cielos de Bolivia</h3>
+                    <p>
+                        La Policía Aérea Boliviana se dedica a la vigilancia, control y gestión de aeronaves
+                        para garantizar la seguridad y el orden en el espacio aéreo nacional.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="/admin/login" class="btn btn-primary">Ingresar al sistema</a>
+                        <a href="#about" class="btn btn-secondary">Conócenos</a>
                     </div>
-                    <div><small class="muted">Espacio para ícono o imagen</small></div>
                 </div>
-                <div class="card">
-                    <div>
-                        <h3 style="color:var(--olivo)">Motores</h3>
-                        <p class="muted">Registro por número de parte/serie, tipo/modelo, condición y documento legal de respaldo.</p>
+                <div class="hero-image">
+                    <div class="hero-image-card">
+                        <img src="{{ asset('storage/images/EscuadroAeronautico.jpg') }}" alt="Escuadrón Aeronáutico">
                     </div>
-                    <div><small class="muted">Espacio para ícono o imagen</small></div>
-                </div>
-                <div class="card">
-                    <div>
-                        <h3 style="color:var(--olivo)">Repuestos</h3>
-                        <p class="muted">Control de repuestos con cantidad, condición (nuevo/usado/reparado) y ubicación actual.</p>
-                    </div>
-                    <div><small class="muted">Espacio para ícono o imagen</small></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section" style="background:#fff">
-        <div class="container">
-            <h2 style="margin:0 0 1rem 0;color:var(--olivo)">Galería / Banners</h2>
-            <div class="gallery">
-                <div class="thumb">Lugar para imagen 1 (logo, insignia o hangar)</div>
-                <div class="thumb">Lugar para imagen 2 (aeronave)</div>
-                <div class="thumb">Lugar para imagen 3 (personal)</div>
+        <!-- Sección Acerca de -->
+        <section id="about" class="section about">
+            <div class="container about-grid">
+                <div>
+                    <h2 class="section-title">Acerca de Nosotros</h2>
+                    <p>
+                        La Policía Aérea Boliviana es una institución comprometida con la seguridad y el control del
+                        espacio aéreo. Nuestro objetivo es garantizar operaciones aéreas seguras y eficientes,
+                        apoyando a las fuerzas del orden y protegiendo a la ciudadanía en todo el territorio nacional.
+                    </p>
+                    <p>
+                        A través de sistemas de gestión modernos, personal especializado y protocolos estrictos,
+                        optimizamos el uso de aeronaves, motores y repuestos para mantener una operatividad constante.
+                    </p>
+                </div>
+                <div class="about-image">
+                    <img src="{{ asset('storage/images/EscuadroDeAviones.jpg') }}" alt="Escuadrón de Aviones">
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
-            <div class="muted">© {{ date('Y') }} Policía Aérea Boliviana · Todos los derechos reservados</div>
-            <div class="muted">Soporte: Tecnologías de Información</div>
+        <!-- Sección Servicios -->
+        <section id="services" class="section services">
+            <div class="container">
+                <h2 class="section-title center">Nuestros Servicios</h2>
+                <p class="section-description center">
+                    Un sistema integral para la gestión, control y apoyo a las operaciones aéreas de la institución.
+                </p>
+
+                <div class="services-container">
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="{{ asset('storage/images/escuadroDeHelicopteros.jpg') }}" alt="Operaciones con helicópteros">
+                        </div>
+                        <div class="service-body">
+                            <h3>Operaciones Aéreas</h3>
+                            <p>
+                                Coordinamos y supervisamos operaciones aéreas tácticas y estratégicas
+                                para garantizar la seguridad en el espacio aéreo boliviano.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="{{ asset('storage/images/escudoPolicia.jpg') }}" alt="Escudo de la Policía Boliviana">
+                        </div>
+                        <div class="service-body">
+                            <h3>Gestión de Inventarios</h3>
+                            <p>
+                                Controlamos y gestionamos el inventario de aeronaves, motores y repuestos,
+                                asegurando la trazabilidad y disponibilidad para cada misión.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="{{ asset('storage/images/EscuadroAeronautico.jpg') }}" alt="Aeronaves en formación">
+                        </div>
+                        <div class="service-body">
+                            <h3>Capacitación</h3>
+                            <p>
+                                Ofrecemos programas de capacitación para personal técnico y operativo,
+                                fortaleciendo competencias en el manejo y mantenimiento de aeronaves.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Contacto -->
+        <section id="contact" class="section contact">
+            <div class="container contact-grid">
+                <div class="contact-info">
+                    <h2 class="section-title">Contáctanos</h2>
+                    <p>
+                        ¿Tienes preguntas o necesitas más información sobre el sistema de gestión de aeronaves?
+                        Nuestro equipo está disponible para atender tus consultas.
+                    </p>
+                    <ul class="contact-list">
+                        <li><strong>Unidad:</strong> Policía Aérea Boliviana</li>
+                        <li><strong>Uso:</strong> Sistema interno de gestión institucional</li>
+                        <li><strong>Atención:</strong> Personal autorizado</li>
+                    </ul>
+                </div>
+
+                <div class="contact-form-card">
+                    <form action="#" method="POST" class="contact-form">
+                        <div class="form-row">
+                            <input type="text" name="name" placeholder="Tu nombre" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="email" name="email" placeholder="Tu correo electrónico" required>
+                        </div>
+                        <div class="form-row">
+                            <textarea name="message" placeholder="Tu mensaje" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="main-footer">
+        <div class="container footer-inner">
+            <p>&copy; 2025 Policía Aérea Boliviana. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <script src="{{ asset('js/welcome.js') }}"></script>
 </body>
 </html>

@@ -28,9 +28,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('Aerea')
+            ->brandName('Policía Aérea Boliviana')
+            ->brandLogo(asset('storage/images/EscudoNacional.jpg'))
             ->colors([
-                // Color institucional solicitado: #808000 (RGB 128,128,0)
                 'primary' => Color::hex('#808000'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

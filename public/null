@@ -1,0 +1,109 @@
+use Illuminate\Support\Facades\Auth;
+
+$usuario = Auth::user();
+dd($usuario);
+use Illuminate\Support\Facades\Auth;
+
+$usuario = Auth::user();
+dd($usuario);
+use Illuminate\Support\Facades\Auth;
+
+$usuario = Auth::user();
+dd($usuario);
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+dd($usuario);
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+Aeronave::create([
+    'matricula' => 'XYZ789',
+    'tipo' => 'ala fija',
+    'modelo' => 'Cessna 182',
+    'marca' => 'Cessna',
+]);
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+
+App\Models\AuditLog::latest('created_at')->first();
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+
+App\Models\AuditLog::latest('created_at')->first();
+
+
+$log = App\Models\AuditLog::latest('created_at')->first();
+$user = $log->user; 
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+
+App\Models\AuditLog::latest('created_at')->first();
+
+
+$log = App\Models\AuditLog::latest('created_at')->first();
+$user = $log->user; 
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+
+App\Models\AuditLog::latest('created_at')->first();
+
+
+$log = App\Models\AuditLog::latest('created_at')->first();
+$user = $log->user; 
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+
+App\Models\AuditLog::latest('created_at')->first();
+
+$user = $log->user; 
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+
+App\Models\AuditLog::latest('created_at')->first();
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+
+App\Models\AuditLog::latest('created_at')->first();
+
+
+$log = App\Models\AuditLog::latest('created')->first();
+$user = $log->user; 
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+
+App\Models\AuditLog::latest('created_at')->first();
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+
+App\Models\AuditLog::latest('created_at')->first();
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+
+App\Models\AuditLog::latest('created_at')->first();
+
+
+$log = App\Models\AuditLog::latest('created')->first();
+$user = $log->user; 
+use Illuminate\Support\Facades\Auth;
+$usuario = Auth::user();
+
+
+App\Models\AuditLog::latest('created_at')->first();
+
+
+$log = App\Models\AuditLog::latest('created_at')->first();
+$user = $log->user; 

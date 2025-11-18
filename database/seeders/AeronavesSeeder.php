@@ -6,6 +6,8 @@ use App\Models\Aeronave;
 use App\Models\Fabricante;
 use App\Models\Hangar;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AeronavesSeeder extends Seeder
 {
@@ -91,5 +93,28 @@ class AeronavesSeeder extends Seeder
                 ]
             );
         }
+
+        // Obtener el usuario con id = 1
+        $usuario = User::find(1);
+        dd($usuario);
+
+        if (!$usuario) {
+            // Si no existe el usuario con id = 1, crear uno nuevo
+            $usuario = User::create([
+                'id' => 1, // Forzar el ID a 1
+                'name' => 'Seeder User',
+                'email' => 'seeder@example.com',
+                'password' => bcrypt('password'), // Contraseña predeterminada
+            ]);
+        }
+
+        // Simular que este usuario está autenticado
+        Auth::login($usuario);
+
+        // Crear registros de aeronaves
+        Aeronave::factory()->count(20)->create();
+
+        // Cerrar sesión después de ejecutar el seeder
+        Auth::logout();
     }
 }

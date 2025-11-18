@@ -27,15 +27,14 @@ class DatabaseSeeder extends Seeder
             IdiomasSeeder::class,
             UbicacionesSeeder::class,
             HangaresSeeder::class,
-            AeronavesSeeder::class,
             UserModel::class,
+            AeronavesSeeder::class,
             DepartamentoSeeder::class,
             ProvinciaSeeder::class,
             MunicipioSeeder::class,
             ZonaSeeder::class,
             BarrioSeeder::class,
             PartesCatalogoSeeder::class,
-            AeronavesSeeder::class,
         ]);
     }
 }

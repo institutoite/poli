@@ -4,15 +4,58 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Traits\Auditable;
 
 class Aeronave extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes, Auditable;
 
     protected $fillable = [
         'matricula', 'tipo', 'modelo', 'marca', 'numero_serie', 'numero_parte', 'fabricante_id',
         'estado', 'hangar_id', 'ubicacion_actual', 'documento_legal', 'documento',
+        'horas_vuelo_total', 'horas_desde_mantenimiento', 'mantenimiento_cada_horas', 'fecha_ultimo_mantenimiento',
     ];
+     
+
+    
+
+    protected $casts = [
+            'fecha_ultimo_mantenimiento' => 'date',
+            'horas_vuelo_total' => 'decimal:1',
+            'horas_desde_mantenimiento' => 'decimal:1',
+            'mantenimiento_pendiente' => 'boolean', // Cast existente
+        ];
+
+    public function getHorasRestantesParaMantenimientoAttribute(): float
+    {
+        $intervalo = (int) ($this->mantenimiento_cada_horas ?? 50);
+        $desde = (float) ($this->horas_desde_mantenimiento ?? 0);
+        $restantes = $intervalo - $desde;
+        return $restantes > 0 ? $restantes : 0.0;
+    }
+
+    public function getUltimaAccionAttribute()
+    {
+        $log = AuditLog::where('model_type', self::class)
+            ->where('model_id', $this->id)
+            ->latest('created_at')
+            ->first();
+
+        if ($log) {
+            $usuario = $log->user->name ?? 'Desconocido';
+            return ucfirst($log->action) . ' por ' . $usuario;
+        }
+
+        return 'Sin acciones registradas';
+    }
+    
+    public function getMantenimientoVencidoAttribute(): bool
+    {
+        $intervalo = (int) ($this->mantenimiento_cada_horas ?? 50);
+        $desde = (float) ($this->horas_desde_mantenimiento ?? 0);
+        return $desde >= $intervalo;
+    }
 
     public function motores()
     {
