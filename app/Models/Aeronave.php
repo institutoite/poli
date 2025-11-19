@@ -143,4 +143,16 @@ class Aeronave extends Model
         }
         $this->attributes['estado'] = 'activo';
     }
+
+    // Relación con la tabla audit_logs
+    public function auditLogs()
+    {
+        return $this->hasMany(AuditLog::class, 'model_id')->where('model_type', self::class);
+    }
+
+    // Obtener el último registro de auditoría
+    public function lastAuditLog()
+    {
+        return $this->auditLogs()->latest()->first();
+    }
 }

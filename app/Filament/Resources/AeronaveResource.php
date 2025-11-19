@@ -12,6 +12,13 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AeronavesExport;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\BulkAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Actions\EditAction;
 
 class AeronaveResource extends Resource
 {
@@ -109,16 +116,12 @@ class AeronaveResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('matricula')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('matricula')->searchable(),
                 Tables\Columns\TextColumn::make('tipo'),
-                Tables\Columns\TextColumn::make('modelo')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('modelo')->searchable(),
                 Tables\Columns\TextColumn::make('marca'),
-                Tables\Columns\TextColumn::make('numero_serie')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('numero_parte')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('numero_serie')->searchable(),
+                Tables\Columns\TextColumn::make('numero_parte')->searchable(),
                 Tables\Columns\TextColumn::make('fabricante.nombre')
                     ->label('Fabricante')
                     ->sortable()
@@ -134,17 +137,13 @@ class AeronaveResource extends Resource
                         'warning' => 'mantenimiento',
                         'secondary' => 'inactivo',
                     ]),
-                
-                /*Tables\Columns\TextColumn::make('documento_legal')
-                    ->searchable(),*/
-                Tables\Columns\IconColumn::make('documento')
+                Tables\Columns\TextColumn::make('documento')
                     ->label('Documento')
-                    ->icon('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5v-12m0 12l-3-3m3 3l3-3m6 6H6" />
-                    </svg>') // SVG del ícono de descarga
+                    ->formatStateUsing(fn () => 'Descargar')
                     ->url(fn (Aeronave $record) => $record->documento ? asset('storage/' . $record->documento) : null)
                     ->openUrlInNewTab()
-                    ->tooltip('Descargar documento'),
+                    ->tooltip('Descargar documento')
+                    ->extraAttributes(['class' => 'text-primary-600 font-semibold underline']),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -157,9 +156,6 @@ class AeronaveResource extends Resource
                     ->label('Última Acción')
                     ->sortable()
                     ->getStateUsing(fn (Aeronave $record) => $record->ultima_accion),
-            ])
-            ->contentGrid([
-                    'class' => 'custom-background', // Clase personalizada para el fondo
             ])
             ->filters([
                 Tables\Filters\Filter::make('tipo')
@@ -174,30 +170,43 @@ class AeronaveResource extends Resource
                             ->columnSpanFull(),
                     ])
                     ->query(function (Builder $query, array $data) {
-                        if (! empty($data['tipo'])) {
+                        if (!empty($data['tipo'])) {
                             $query->where('tipo', $data['tipo']);
                         }
                         return $query;
                     })
                     ->indicateUsing(function (array $data) {
-                        if (! empty($data['tipo'])) {
+                        if (!empty($data['tipo'])) {
                             return 'Tipo: ' . ($data['tipo'] === 'ala fija' ? 'Ala fija' : 'Ala rotatoria');
                         }
                         return null;
                     }),
+            ])
+            ->headerActions([
+                Tables\Actions\Action::make('exportExcel')
+                    ->label('Exportar a Excel')
+                    ->action(function () {
+                        return \Maatwebsite\Excel\Facades\Excel::download(new \App\Exports\AeronavesExport, 'aeronaves.xlsx');
+                    }),
+                Tables\Actions\Action::make('exportWord')
+                    ->label('Exportar a Word')
+                    ->disabled() // Botón deshabilitado
+                    ->tooltip('Muy pronto disponible'), // Mensaje al pasar el cursor
+                Tables\Actions\Action::make('exportPdf')
+                    ->label('Exportar a PDF')
+                    ->disabled() // Botón deshabilitado
+                    ->tooltip('Muy pronto disponible'), // Mensaje al pasar el cursor
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->label('Editar'),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
-                        ->label('Eliminar seleccionados')
-                        ->modalHeading('Eliminar registros seleccionados')
-                        ->modalSubmitActionLabel('Eliminar')
-                        ->modalCancelActionLabel('Cancelar'),
-                ]),
+                Tables\Actions\DeleteBulkAction::make()
+                    ->label('Eliminar seleccionados')
+                    ->modalHeading('Eliminar registros seleccionados')
+                    ->modalSubmitActionLabel('Eliminar')
+                    ->modalCancelActionLabel('Cancelar'),
             ]);
     }
 

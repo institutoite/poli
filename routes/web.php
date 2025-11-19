@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Controllers\AeronaveController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('aeronaves', AeronaveController::class);
 });
+
+Route::get('/exportar-pdf', [PDFController::class, 'exportarPDF'])->name('exportar.pdf');
 
 
