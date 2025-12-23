@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             ZonaSeeder::class,
             BarrioSeeder::class,
             PartesCatalogoSeeder::class,
+            PoliceOfficerSeeder::class,
         ]);
     }
 }
