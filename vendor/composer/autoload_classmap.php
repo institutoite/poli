@@ -254,6 +254,7 @@ return array(
     'Database\\Seeders\\MunicipioSeeder' => $baseDir . '/database/seeders/MunicipioSeeder.php',
     'Database\\Seeders\\NacionalidadesSeeder' => $baseDir . '/database/seeders/NacionalidadesSeeder.php',
     'Database\\Seeders\\PartesCatalogoSeeder' => $baseDir . '/database/seeders/PartesCatalogoSeeder.php',
+    'Database\\Seeders\\PoliceOfficerSeeder' => $baseDir . '/database/seeders/PoliceOfficerSeeder.php',
     'Database\\Seeders\\ProvinciaSeeder' => $baseDir . '/database/seeders/ProvinciaSeeder.php',
     'Database\\Seeders\\UbicacionesSeeder' => $baseDir . '/database/seeders/UbicacionesSeeder.php',
     'Database\\Seeders\\UserModel' => $baseDir . '/database/seeders/UserModel.php',

@@ -85,12 +85,8 @@ class PoliceOfficerResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('categoria_licencia_conducir')
                     ->options([
-                        'A' => 'A',
-                        'B' => 'B',
-                        'C' => 'C',
-                        'M' => 'M',
-                        'P' => 'P',
-                        'T' => 'T',
+                        'moto' => 'Moto',
+                        'vehiculo' => 'Vehiculo',
                         'Ninguna' => 'Ninguna',
                     ])
                     ->default(null),
@@ -194,6 +190,16 @@ class PoliceOfficerResource extends Resource
                         'AB-' => 'AB-',
                         'O+' => 'O+',
                         'O-' => 'O-',
+                        'A1+' => 'A1+',
+                        'A1-' => 'A1-',
+                        'A2+' => 'A2+',
+                        'A2-' => 'A2-',
+                        'A1B+' => 'A1B+',
+                        'A1B-' => 'A1B-',
+                        'A2B+' => 'A2B+',
+                        'A2B-' => 'A2B-',
+                        'Oh+' => 'Oh+',
+                        'Oh-' => 'Oh-',
                     ])
                     ->default(null),
                 Forms\Components\TextInput::make('contacto_emergencia')

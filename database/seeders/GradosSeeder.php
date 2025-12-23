@@ -9,22 +9,23 @@ class GradosSeeder extends Seeder
 {
     public function run(): void
     {
-        // Referencial (Policía Boliviana - ejemplo de estructura)
+        // Grados actualizados según la lista proporcionada
         $grados = [
-            ['nombre' => 'Sargento 2º', 'orden' => 1],
-            ['nombre' => 'Sargento 1º', 'orden' => 2],
-            ['nombre' => 'Sof. Suboficial 2º', 'orden' => 3],
-            ['nombre' => 'Sof. Suboficial 1º', 'orden' => 4],
-            ['nombre' => 'Sof. Técnico de 3ra', 'orden' => 5],
-            ['nombre' => 'Sof. Técnico de 2da', 'orden' => 6],
-            ['nombre' => 'Sof. Técnico de 1ra', 'orden' => 7],
-            ['nombre' => 'Alferez', 'orden' => 8],
-            ['nombre' => 'Teniente', 'orden' => 9],
-            ['nombre' => 'Capitán', 'orden' => 10],
-            ['nombre' => 'Mayor', 'orden' => 11],
-            ['nombre' => 'Teniente Coronel', 'orden' => 12],
-            ['nombre' => 'Coronel', 'orden' => 13],
-            ['nombre' => 'General', 'orden' => 14],
+            ['nombre' => 'Gral. 1ro.', 'orden' => 1],
+            ['nombre' => 'Gral.', 'orden' => 2],
+            ['nombre' => 'Cnl. DESP', 'orden' => 3],
+            ['nombre' => 'Tcnl. DEAP.', 'orden' => 4],
+            ['nombre' => 'My.', 'orden' => 5],
+            ['nombre' => 'Cap.', 'orden' => 6],
+            ['nombre' => 'Tte.', 'orden' => 7],
+            ['nombre' => 'Sbtte.', 'orden' => 8],
+            ['nombre' => 'Sof. My.', 'orden' => 9],
+            ['nombre' => 'Sof. 1ro.', 'orden' => 10],
+            ['nombre' => 'Sof. 2do.', 'orden' => 11],
+            ['nombre' => 'Sgto. My.', 'orden' => 12],
+            ['nombre' => 'Sgto. 1ro.', 'orden' => 13],
+            ['nombre' => 'Sgto. 2do.', 'orden' => 14],
+            ['nombre' => 'Sgto.', 'orden' => 15],
         ];
 
         foreach ($grados as $g) {

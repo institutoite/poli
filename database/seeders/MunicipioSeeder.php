@@ -9,30 +9,39 @@ class MunicipioSeeder extends Seeder
 {
     public function run(): void
     {
+        $provinciaIds = json_decode(file_get_contents(database_path('seeders/tmp_provincia_ids.json')), true);
         $municipios = [
-            // Provincia: Murillo
-            ['provincia_id' => 1, 'nombre' => 'La Paz', 'codigo' => 'LPZ'],
-            ['provincia_id' => 1, 'nombre' => 'El Alto', 'codigo' => 'ALT'],
-            ['provincia_id' => 1, 'nombre' => 'Viacha', 'codigo' => 'VIA'],
-
-            // Provincia: Pacajes
-            ['provincia_id' => 2, 'nombre' => 'Achacachi', 'codigo' => 'ACH'],
-            ['provincia_id' => 2, 'nombre' => 'Pucarani', 'codigo' => 'PUC'],
-
-            // Provincia: Cercado
-            ['provincia_id' => 3, 'nombre' => 'Cochabamba', 'codigo' => 'CBB'],
-            ['provincia_id' => 3, 'nombre' => 'Quillacollo', 'codigo' => 'QUI'],
-
             // Provincia: Andrés Ibáñez
-            ['provincia_id' => 4, 'nombre' => 'Santa Cruz de la Sierra', 'codigo' => 'SCR'],
-            ['provincia_id' => 4, 'nombre' => 'Warnes', 'codigo' => 'WAR'],
+            ['provincia' => 'Andrés Ibáñez', 'nombre' => 'Santa Cruz de la Sierra', 'codigo' => 'SCR'],
+            ['provincia' => 'Andrés Ibáñez', 'nombre' => 'El Torno', 'codigo' => 'TOR'],
+            ['provincia' => 'Andrés Ibáñez', 'nombre' => 'La Guardia', 'codigo' => 'LAG'],
+            ['provincia' => 'Andrés Ibáñez', 'nombre' => 'Porongo', 'codigo' => 'POR'],
+            ['provincia' => 'Andrés Ibáñez', 'nombre' => 'Cotoca', 'codigo' => 'COT'],
+            // Provincia: Warnes
+            ['provincia' => 'Warnes', 'nombre' => 'Warnes', 'codigo' => 'WAR'],
+            ['provincia' => 'Warnes', 'nombre' => 'Okinawa Uno', 'codigo' => 'OKI'],
+            // Provincia: Ichilo
+            ['provincia' => 'Ichilo', 'nombre' => 'Yapacaní', 'codigo' => 'YAP'],
+            ['provincia' => 'Ichilo', 'nombre' => 'San Carlos', 'codigo' => 'SCA'],
+            // Provincia: Sara
+            ['provincia' => 'Sara', 'nombre' => 'Portachuelo', 'codigo' => 'POR'],
+            ['provincia' => 'Sara', 'nombre' => 'Santa Rosa del Sara', 'codigo' => 'SRS'],
+            // Provincia: Velasco
+            ['provincia' => 'Velasco', 'nombre' => 'San Ignacio de Velasco', 'codigo' => 'SIV'],
+            ['provincia' => 'Velasco', 'nombre' => 'San Miguel de Velasco', 'codigo' => 'SMV'],
         ];
 
+        $municipioIds = [];
         foreach ($municipios as $municipio) {
-            Municipio::updateOrInsert(
-                ['provincia_id' => $municipio['provincia_id'], 'nombre' => $municipio['nombre']],
-                ['codigo' => $municipio['codigo']]
-            );
+            $provincia_id = $provinciaIds[$municipio['provincia']] ?? null;
+            if ($provincia_id) {
+                $municipioModel = \App\Models\Municipio::updateOrCreate(
+                    ['provincia_id' => $provincia_id, 'nombre' => $municipio['nombre']],
+                    ['codigo' => $municipio['codigo']]
+                );
+                $municipioIds[$municipio['nombre']] = $municipioModel->id;
+            }
         }
+        file_put_contents(database_path('seeders/tmp_municipio_ids.json'), json_encode($municipioIds));
     }
 }

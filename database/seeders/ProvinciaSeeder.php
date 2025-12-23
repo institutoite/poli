@@ -9,31 +9,33 @@ class ProvinciaSeeder extends Seeder
 {
     public function run(): void
     {
+        $departamentoId = (int) file_get_contents(database_path('seeders/tmp_departamento_id.txt'));
         $provincias = [
-            ['departamento_id' => 1, 'nombre' => 'Murillo', 'codigo' => 'MUR'],
-            ['departamento_id' => 1, 'nombre' => 'Pacajes', 'codigo' => 'PAC'],
-            ['departamento_id' => 1, 'nombre' => 'Ingavi', 'codigo' => 'ING'],
-            ['departamento_id' => 1, 'nombre' => 'Los Andes', 'codigo' => 'AND'],
-            ['departamento_id' => 1, 'nombre' => 'Larecaja', 'codigo' => 'LAR'],
-
-            ['departamento_id' => 2, 'nombre' => 'Cercado', 'codigo' => 'CER'],
-            ['departamento_id' => 2, 'nombre' => 'Chapare', 'codigo' => 'CHA'],
-            ['departamento_id' => 2, 'nombre' => 'Quillacollo', 'codigo' => 'QUI'],
-            ['departamento_id' => 2, 'nombre' => 'Tapacarí', 'codigo' => 'TAP'],
-            ['departamento_id' => 2, 'nombre' => 'Arque', 'codigo' => 'ARQ'],
-            
-            ['departamento_id' => 3, 'nombre' => 'Andrés Ibáñez', 'codigo' => 'AND'],
-            ['departamento_id' => 3, 'nombre' => 'Warnes', 'codigo' => 'WAR'],
-            ['departamento_id' => 3, 'nombre' => 'Ichilo', 'codigo' => 'ICH'],
-            ['departamento_id' => 3, 'nombre' => 'Sara', 'codigo' => 'SAR'],
-            ['departamento_id' => 3, 'nombre' => 'Velasco', 'codigo' => 'VEL'],
+            ['nombre' => 'Andrés Ibáñez', 'codigo' => 'AND'],
+            ['nombre' => 'Warnes', 'codigo' => 'WAR'],
+            ['nombre' => 'Ichilo', 'codigo' => 'ICH'],
+            ['nombre' => 'Sara', 'codigo' => 'SAR'],
+            ['nombre' => 'Velasco', 'codigo' => 'VEL'],
+            ['nombre' => 'Chiquitos', 'codigo' => 'CHQ'],
+            ['nombre' => 'Cordillera', 'codigo' => 'COR'],
+            ['nombre' => 'Florida', 'codigo' => 'FLO'],
+            ['nombre' => 'Germán Busch', 'codigo' => 'GBU'],
+            ['nombre' => 'Guarayos', 'codigo' => 'GUA'],
+            ['nombre' => 'Obispo Santistevan', 'codigo' => 'OBS'],
+            ['nombre' => 'Ángel Sandoval', 'codigo' => 'SAN'],
+            ['nombre' => 'Manuel María Caballero', 'codigo' => 'MMC'],
+            ['nombre' => 'Ñuflo de Chávez', 'codigo' => 'NCH'],
+            ['nombre' => 'Vallegrande', 'codigo' => 'VAL'],
         ];
 
+        $provinciaIds = [];
         foreach ($provincias as $provincia) {
-            Provincia::updateOrInsert(
-                ['departamento_id' => $provincia['departamento_id'], 'nombre' => $provincia['nombre']],
+            $provinciaModel = \App\Models\Provincia::updateOrCreate(
+                ['departamento_id' => $departamentoId, 'nombre' => $provincia['nombre']],
                 ['codigo' => $provincia['codigo']]
             );
+            $provinciaIds[$provincia['nombre']] = $provinciaModel->id;
         }
+        file_put_contents(database_path('seeders/tmp_provincia_ids.json'), json_encode($provinciaIds));
     }
 }
